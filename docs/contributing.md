@@ -28,3 +28,6 @@ This will create a local copy of the repository to work on.
 
 ```git checkout main```
 ```git merge upstream/main```
+
+## Finishing up
+Once you have completed these steps you are free to push and pull from your repository!
