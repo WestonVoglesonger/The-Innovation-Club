@@ -40,16 +40,15 @@ To keep your fork up to date as the main repository progresses:
 
 3.Merge the main repository changes into your fork
 
-`git checkout main
-git merge upstream/main`
+```git checkout main```
+```git merge upstream/main```
 
 ## Making & Submitting Changes
 
 After syncing your fork, make any desired changes locally. Commit and push them to your fork:
 
-`git add .
-git commit -m "Your commit message"
-git push origin <Your branch>`
+```git add .```
+```git commit -m "Your commit message"```
+```git push origin <Your branch>```
 
 When ready, submit a pull request to the main Edge-Carolina repository with your changes. Project owners can then review and potentially merge them.
-````
