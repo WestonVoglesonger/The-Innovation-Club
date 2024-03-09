@@ -3,7 +3,12 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f5f5f5;
-    bottom: 0;
+    min-height: 100vh;
+    /* Added to ensure the footer stays at the bottom */
+    display: flex;
+    /* Added to use flexbox layout */
+    flex-direction: column;
+    /* Added to make the footer stick to the bottom */
 }
 
 header {
@@ -38,6 +43,8 @@ nav ul li a.active {
 
 main {
     padding: 20px;
+    flex-grow: 1;
+    /* Added to make the main content take up remaining vertical space */
 }
 
 .product-overview h2 {
@@ -64,9 +71,6 @@ footer {
     color: #ffffff;
     text-align: center;
     padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -77,4 +81,25 @@ footer {
     .product-widget {
         width: 100%;
     }
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px;
+    padding: 10px;
+    transform: translateX(15px);
+}
+
+.product-card {
+    /* Your existing product card styles */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    width: 400px;
+    max-width: 100%;
+    /* Added to ensure responsiveness */
+}
+
+.product-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }

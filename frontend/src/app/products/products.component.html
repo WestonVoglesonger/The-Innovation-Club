@@ -18,10 +18,13 @@
       <button (click)="navigateToCreateProduct()" class="create-button">
         Create Product
       </button>
+      <div class="products-container">
       <product-widget
+        class="product-card"
         [productData]="product"
         *ngFor="let product of (productService.products$ | async)!">
       </product-widget>
+    </div>
     </section>
   </main>
 

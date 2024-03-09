@@ -1,4 +1,3 @@
-<div class="product-card">
   <!-- Header -->
   <div class="product-card-header">
     <h3>{{ productData.name }}</h3>
@@ -6,16 +5,16 @@
 
   <!-- Screenshot -->
   <div class="product-card-screenshot">
-    <img [src]="getScreenshotUrl()" alt="Screenshot of {{ productData.name }}">
+    <a href="{{ productData.url }}" target="_blank">
+      <img [src]="getScreenshotUrl()" alt="Screenshot of {{ productData.name }}">
+    </a>
   </div>
 
   <div class="product-card-content">
     <p>{{ productData.description }}</p>
-    <a href="{{ productData.url }}" target="_blank">View Product</a>
   </div>
 
   <div class="product-card-actions">
     <button class="product-button" (click)="editProduct()">Edit</button>
     <button class="product-button" (click)="deleteProduct()">Delete</button>
   </div>
-</div>

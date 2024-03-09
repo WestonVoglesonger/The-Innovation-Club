@@ -5,12 +5,13 @@
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    width: 300px;
+    width: 50px;
+    max-width: 100%;
   }
   
   .product-card-header {
     background-color: #f8f8f8;
-    padding: 10px;
+    padding: 20px 10px; /* Increased top/bottom padding */
     border-bottom: 1px solid #ddd;
   }
   
@@ -64,3 +65,11 @@
     background-color: #0056b3;
   }
   
+  .product-card-screenshot a {
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  
+  .product-card-screenshot a:hover {
+    transform: scale(1.05);
+  }
