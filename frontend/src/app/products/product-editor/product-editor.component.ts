@@ -11,7 +11,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 export class ProductEditorComponent {
   /** Form controls (individual form items) */
   name = new FormControl('', [Validators.required, Validators.maxLength(50)]); // Limit to 50 characters
-  description = new FormControl('', [Validators.required, Validators.maxLength(200)]); // Limit to 200 characters
+  description = new FormControl('', [Validators.required, Validators.maxLength(100)]); // Limit to 200 characters
   url = new FormControl('', [Validators.required]); // No length limit
 
   /** Form group (stores all form controls) */
