@@ -12,10 +12,16 @@ export class ProductWidget {
   /** Product this widget is showing. */
   @Input() productData!: ProductData;
 
-  constructor(
-    private productService: ProductService,
-    private router: Router,
-  ) {}
+  // Modify the constructor to inject the ProductService
+constructor(
+  public productService: ProductService,
+  public router: Router
+) {}
+
+// Add a new method to fetch the screenshot
+getScreenshotUrl() {
+  return this.productService.getScreenshotUrl(this.productData.url);
+}
 
   /** Navigates to the product edit page */
   editProduct() {
@@ -24,8 +30,9 @@ export class ProductWidget {
 
   /** Deletes the current product */
   deleteProduct() {
-    this.productService.deleteProduct(this.productData.id).subscribe(() => {
-      this.productService.getProducts();
+    this.productService.deleteProduct(this.productData.id!).subscribe(() => {
+      // Subscribe to the getProducts() method to refresh the product list
+      this.productService.getProducts().subscribe();
     });
   }
-}
+}  

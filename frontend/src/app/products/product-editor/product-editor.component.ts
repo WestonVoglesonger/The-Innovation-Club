@@ -57,7 +57,7 @@ export class ProductEditorComponent {
       if (this.isNew) {
         this.productService
           .createProduct({
-            id: 0,
+            id: null,
             name: this.name.value ?? '',
             description: this.description.value ?? '',
             url: this.url.value ?? '',

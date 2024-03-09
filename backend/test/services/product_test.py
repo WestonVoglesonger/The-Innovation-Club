@@ -9,6 +9,7 @@ from ...services.exceptions import (
 from .fixtures import product_service
 from ..product_data import fake_data_fixture, product_1, new_product, updated_product
 
+from ...models.product_data import ProductData
 
 def test_get_products(product_service: ProductService) -> None:
     products = product_service.get_products()
@@ -26,12 +27,18 @@ def test_get_product_non_existent(product_service: ProductService) -> None:
         product_service.get_product(999)
 
 def test_create_product(product_service: ProductService) -> None:
-    created_product = product_service.create_product(new_product)
+    updated_product = ProductData(
+    id=None,
+    name="Updated Product",
+    description="This product has been updated",
+    url="https://github.com/example/updated-product"
+    )
+
+    created_product = product_service.create_product(updated_product)
     assert created_product is not None
-    assert created_product.id == new_product.id
-    assert created_product.name == new_product.name
-    assert created_product.description == new_product.description
-    assert created_product.url == new_product.url
+    assert created_product.name == updated_product.name
+    assert created_product.description == updated_product.description
+    assert created_product.url == updated_product.url
 
 def test_create_product_existing_name(product_service: ProductService) -> None:
     with pytest.raises(ProductRegistrationException):

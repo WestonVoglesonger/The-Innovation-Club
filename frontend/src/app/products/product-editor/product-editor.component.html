@@ -1,0 +1,23 @@
+<head>
+    <title>Product Editor</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Product Editor</h2>
+        <form [formGroup]="productForm" (ngSubmit)="onSubmitForm()">
+            <div class="form-group">
+                <label for="product-name">Product Name:</label>
+                <input type="text" formControlName="name" id="product-name">
+            </div>
+            <div class="form-group">
+                <label for="product-description">Description:</label>
+                <textarea formControlName="description" id="product-description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="product-url">Product URL:</label>
+                <input type="text" formControlName="url" id="product-url">
+            </div>
+            <button type="submit">Save Product</button>
+        </form>
+    </div>
+</body>

@@ -10,6 +10,8 @@ import { catchError, map } from "rxjs/operators";
 export class ProductService {
   private products: ReplaySubject<ProductData[]> = new ReplaySubject(1);
   products$: Observable<ProductData[]> = this.products.asObservable();
+  private apiKey = '02ca0b1d857da21a9d7b85c42a407cc4';
+  private screenshotApiUrl = 'https://api.screenshotlayer.com/api/capture?access_key=02ca0b1d857da21a9d7b85c42a407cc4';
 
   constructor(protected http: HttpClient) {
     this.products.next([]);
@@ -50,4 +52,8 @@ export class ProductService {
   deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>("/api/product/" + id);
   }
+
+  getScreenshotUrl(webpageUrl: string): string {
+    return `${this.screenshotApiUrl}&url=${encodeURIComponent(webpageUrl)}`;
+  }  
 }

@@ -60,7 +60,7 @@ def get_product(
 # Creates a new product.
 # Expected return type: ProductData
 @api.post("", response_model=ProductData, tags=["Product"])
-def create_user(
+def create_product(
     product: ProductData,
     product_service: ProductService = Depends(),
 ) -> ProductData:
@@ -74,7 +74,6 @@ def create_user(
     Returns:
         User: Created product
     """
-
     return product_service.create_product(product)
 
 
@@ -82,7 +81,7 @@ def create_user(
 # Updates a product.
 # Expected return type: ProductData
 @api.put("", response_model=ProductData, tags=["Product"])
-def update_user(
+def update_product(
     product: ProductData,
     product_service: ProductService = Depends(),
 ) -> ProductData:
@@ -97,14 +96,14 @@ def update_user(
         ProductData: Updated product
     """
 
-    return product_service.update_user(product)
+    return product_service.update_product(product)
 
 
 # DELETE /api/product/{id}
 # Deletes a product.
 # Expected return type: ProductData
 @api.delete("/{id}", response_model=None, tags=["Product"])
-def delete_user(
+def delete_product(
     id: int,
     product_service: ProductService = Depends(),
 ) -> ProductData:

@@ -10,6 +10,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 from .api import (
     join,
     static_files,
+    product,
 )
 
 from .services.exceptions import (
@@ -43,6 +44,7 @@ app.add_middleware(GZipMiddleware)
 # Plugging in each of the router APIs
 feature_apis = [
     join,
+    product,
 ]
 
 for feature_api in feature_apis:

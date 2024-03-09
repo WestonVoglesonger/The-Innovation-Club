@@ -13,8 +13,8 @@ export class ProductsComponent implements OnInit {
   products: ProductData[] = [];
 
   constructor(
-    private router: Router,
-    private productService: ProductService,
+    public router: Router,
+    public productService: ProductService,
   ) {}
 
   ngOnInit(): void {

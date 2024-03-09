@@ -4,6 +4,11 @@
     <h3>{{ productData.name }}</h3>
   </div>
 
+  <!-- Screenshot -->
+  <div class="product-card-screenshot">
+    <img [src]="getScreenshotUrl()" alt="Screenshot of {{ productData.name }}">
+  </div>
+
   <div class="product-card-content">
     <p>{{ productData.description }}</p>
     <a href="{{ productData.url }}" target="_blank">View Product</a>
