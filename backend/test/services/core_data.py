@@ -6,7 +6,7 @@ this module serves as a helper to bring them all in at once.
 
 import pytest
 from sqlalchemy.orm import Session
-from .. import admin_data
+from .. import user_data
 
 __authors__ = ["Kris Jordan"]
 __copyright__ = "Copyright 2023"
