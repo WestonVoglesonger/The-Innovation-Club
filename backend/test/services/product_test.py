@@ -16,7 +16,7 @@ def test_get_products(product_service: ProductService) -> None:
     assert len(products) == 1 
     
 def test_get_product(product_service: ProductService) -> None:
-    product = product_service.get_product(product_1.id)
+    product = product_service.get_product(product_1.id) # type: ignore
     assert product.id == product_1.id
     assert product.name == product_1.name
     assert product.description == product_1.description
@@ -55,9 +55,9 @@ def test_update_product_non_existent(product_service: ProductService) -> None:
         product_service.update_product(new_product)
 
 def test_delete_product(product_service: ProductService) -> None:
-    product_service.delete_product(product_1.id)
+    product_service.delete_product(product_1.id) # type: ignore
     with pytest.raises(ResourceNotFoundException):
-        product_service.get_product(product_1.id)
+        product_service.get_product(product_1.id) # type: ignore
 
 def test_delete_product_non_existent(product_service: ProductService) -> None:
     with pytest.raises(ResourceNotFoundException):
