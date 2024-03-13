@@ -13,7 +13,7 @@ from backend.entities.admin_entity import AdminEntity
 from backend.models.admin_data import AdminData
 from backend.test.services.reset_table_id_seq import reset_table_id_seq
 
-__authors__ = ["Kris Jordan"]
+__authors__ = ["Kris Jordan", "Weston Voglesonger"]
 __copyright__ = "Copyright 2023"
 __license__ = "MIT"
 
