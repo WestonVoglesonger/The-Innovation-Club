@@ -2,7 +2,7 @@
   <img src="assets/join-bg.jpg" alt="bg" class="cover-image" />
   <h1></h1>
   <div class="form-container">
-    <form [formGroup]="joinForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="firstName">First Name:</label>
         <input
@@ -54,8 +54,8 @@
         />
         <div
           *ngIf="
-            joinForm.get('email')?.errors?.['required'] &&
-            joinForm.get('email')?.touched
+            adminForm.get('email')?.errors?.['required'] &&
+            adminForm.get('email')?.touched
           "
           class="alert alert-danger"
         >
@@ -63,8 +63,8 @@
         </div>
         <div
           *ngIf="
-            joinForm.get('email')?.errors?.['email'] &&
-            joinForm.get('email')?.touched
+            adminForm.get('email')?.errors?.['email'] &&
+            adminForm.get('email')?.touched
           "
           class="alert alert-danger"
         >
@@ -82,8 +82,8 @@
         />
         <div
           *ngIf="
-            joinForm.get('password')?.errors?.['required'] &&
-            joinForm.get('password')?.touched
+            adminForm.get('password')?.errors?.['required'] &&
+            adminForm.get('password')?.touched
           "
           class="alert alert-danger"
         >
@@ -93,7 +93,7 @@
       <button
         type="submit"
         class="btn btn-primary"
-        [disabled]="joinForm.invalid"
+        [disabled]="adminForm.invalid"
       >
         Join Edge Carolina
       </button>

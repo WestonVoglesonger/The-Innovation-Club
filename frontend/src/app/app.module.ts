@@ -17,7 +17,7 @@ import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { NavigationComponent } from "./navigation/navigation.component";
-import { JoinComponent } from "./join/join.component";
+import { AdminComponent } from "./admin/admin.component";
 import { ProductsComponent } from "./products/products.component";
 import { ProductWidget } from "./products/product-widget/product.widget";
 import { ProductEditorComponent } from "./products/product-editor/product-editor.component";
@@ -29,7 +29,7 @@ import { RouterModule } from "@angular/router";
     HomeComponent,
     AboutComponent,
     NavigationComponent,
-    JoinComponent,
+    AdminComponent,
     ProductsComponent,
     ProductWidget,
     ProductEditorComponent,

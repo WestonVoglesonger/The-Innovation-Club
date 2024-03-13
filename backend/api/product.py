@@ -17,7 +17,7 @@ openapi_tags = {
 
 
 # GET /api/join
-# Gets all users.
+# Gets all products.
 # Expected return type: list[ProductData]
 @api.get("", response_model=list[ProductData], tags=["Product"])
 def get_products(
@@ -33,7 +33,7 @@ def get_products(
         list[ProductData]: All products
     """
 
-    # Return all users
+    # Return all products
     return product_service.get_products()
 
 
@@ -72,7 +72,7 @@ def create_product(
         product_service: a valid ProductService
 
     Returns:
-        User: Created product
+        Product: Created product
     """
     return product_service.create_product(product)
 
@@ -106,7 +106,7 @@ def update_product(
 def delete_product(
     id: int,
     product_service: ProductService = Depends(),
-) -> ProductData:
+) -> ProductData | None:
     """
     Delete product.
 

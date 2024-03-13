@@ -1,7 +1,6 @@
-export interface UserData {
+export interface AdminData {
   first_name: string;
   last_name: string;
   email: string;
   password: string;
-  major: string;
 }

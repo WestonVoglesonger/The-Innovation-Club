@@ -1,4 +1,4 @@
-"""Definition of SQLAlchemy table-backed object mapping entity for Users."""
+"""Definition of SQLAlchemy table-backed object mapping entity for Admin."""
 from sqlalchemy import Column, Integer, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import Self
@@ -26,12 +26,12 @@ class AdminEntity(EntityBase):
     hashed_password: Mapped[str] = mapped_column(String(100), nullable=False)
 
     # Example relationship (if applicable)
-    # posts = relationship("PostEntity", back_populates="user")
+    # posts = relationship("PostEntity", back_populates="admin")
 
     @classmethod
     def from_model(cls, model: AdminData) -> Self:
         """
-        Create a UserEntity from a AdminData model.
+        Create a AdminEntity from a AdminData model.
 
         Args:
             model (AdminData): The model to create the entity from.
@@ -49,10 +49,10 @@ class AdminEntity(EntityBase):
 
     def to_model(self) -> AdminData:
         """
-        Create a AdminData model from a UserEntity.
+        Create a AdminData model from a AdminEntity.
 
         Returns:
-            User: A AdminData model for API usage.
+            Admin: A AdminData model for API usage.
         """
         return AdminData(
             id=self.id,
