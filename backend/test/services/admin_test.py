@@ -21,7 +21,6 @@ def test_get_admin(admin_service: AdminService) -> None:
     assert admin.first_name == "root"
     assert admin.last_name == "root"
     assert admin.email == "root@unc.edu"
-    assert admin.hashed_password == "password"
 
 def test_create_admin(admin_service: AdminService) -> None:
     created_admin = admin_service.create_admin(admin)

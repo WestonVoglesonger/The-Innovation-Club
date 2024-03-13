@@ -5,9 +5,13 @@ from ..entities.admin_entity import AdminEntity
 from ..models.admin_data import AdminData
 from .exceptions import (
     ResourceNotFoundException,
-    AdminPermissionException,
     AdminRegistrationException,
 )
+
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 
 class AdminService:
     """Backend service that enables direct modification of admin data."""
@@ -29,10 +33,14 @@ class AdminService:
         return admin_entity.to_model()
 
     def create_admin(self, admin: AdminData) -> AdminData:
-        """Stores a admin in the database."""
+        """Stores an admin in the database."""
         existing_email = self._session.query(AdminEntity).filter(AdminEntity.email == admin.email).first()
         if existing_email:
             raise AdminRegistrationException()
+
+        # Hash the password before storing it
+        hashed_password = pwd_context.hash(admin.hashed_password)
+        admin.hashed_password = hashed_password
 
         new_admin = AdminEntity.from_model(admin)
         self._session.add(new_admin)
@@ -64,3 +72,13 @@ class AdminService:
         """Checks if an email is already registered."""
         existing_email = self._session.query(AdminEntity).filter(AdminEntity.email == email).first()
         return existing_email is not None
+
+    def update_admin_password(self, admin_id: int, new_password: str) -> None:
+        """Updates the password of an admin in the database."""
+        admin_entity = self._session.query(AdminEntity).filter(AdminEntity.id == admin_id).first()
+        if admin_entity is None:
+            raise ResourceNotFoundException("Admin does not exist.")
+
+        hashed_password = pwd_context.hash(new_password)
+        admin_entity.hashed_password = hashed_password
+        self._session.commit()
