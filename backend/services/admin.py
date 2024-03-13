@@ -8,6 +8,14 @@ from .exceptions import (
     AdminRegistrationException,
 )
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+ACCESS_CODE = os.getenv("ACCESS_CODE")
+
+
 from passlib.context import CryptContext
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -27,14 +35,20 @@ class AdminService:
 
     def get_admin(self, admin_id: int) -> AdminData:
         """Gets one admin by an ID."""
-        admin_entity = self._session.query(AdminEntity).filter(AdminEntity.id == admin_id).first()
+        admin_entity = (
+            self._session.query(AdminEntity).filter(AdminEntity.id == admin_id).first()
+        )
         if admin_entity is None:
             raise ResourceNotFoundException("admin does not exist.")
         return admin_entity.to_model()
 
     def create_admin(self, admin: AdminData) -> AdminData:
         """Stores an admin in the database."""
-        existing_email = self._session.query(AdminEntity).filter(AdminEntity.email == admin.email).first()
+        existing_email = (
+            self._session.query(AdminEntity)
+            .filter(AdminEntity.email == admin.email)
+            .first()
+        )
         if existing_email:
             raise AdminRegistrationException()
 
@@ -49,7 +63,9 @@ class AdminService:
 
     def update_admin(self, admin: AdminData) -> AdminData:
         """Modifies one admin in the database."""
-        admin_entity = self._session.query(AdminEntity).filter(AdminEntity.id == admin.id).first()
+        admin_entity = (
+            self._session.query(AdminEntity).filter(AdminEntity.id == admin.id).first()
+        )
         if admin_entity is None:
             raise ResourceNotFoundException("admin does not exist.")
 
@@ -61,7 +77,9 @@ class AdminService:
 
     def delete_admin(self, admin_id: int) -> None:
         """Deletes one admin from the database."""
-        admin_entity = self._session.query(AdminEntity).filter(AdminEntity.id == admin_id).first()
+        admin_entity = (
+            self._session.query(AdminEntity).filter(AdminEntity.id == admin_id).first()
+        )
         if admin_entity is None:
             raise ResourceNotFoundException("admin does not exist.")
 
@@ -70,15 +88,33 @@ class AdminService:
 
     def check_email_registered(self, email: str) -> bool:
         """Checks if an email is already registered."""
-        existing_email = self._session.query(AdminEntity).filter(AdminEntity.email == email).first()
+        existing_email = (
+            self._session.query(AdminEntity).filter(AdminEntity.email == email).first()
+        )
         return existing_email is not None
 
     def update_admin_password(self, admin_id: int, new_password: str) -> None:
         """Updates the password of an admin in the database."""
-        admin_entity = self._session.query(AdminEntity).filter(AdminEntity.id == admin_id).first()
+        admin_entity = (
+            self._session.query(AdminEntity).filter(AdminEntity.id == admin_id).first()
+        )
         if admin_entity is None:
             raise ResourceNotFoundException("Admin does not exist.")
 
         hashed_password = pwd_context.hash(new_password)
         admin_entity.hashed_password = hashed_password
         self._session.commit()
+
+    def verify_admin_password(self, email: str, password: str) -> bool:
+        """Verifies the password of an admin."""
+        admin_entity = (
+            self._session.query(AdminEntity).filter(AdminEntity.email == email).first()
+        )
+        if admin_entity is None:
+            return False
+
+        return pwd_context.verify(password, admin_entity.hashed_password)
+
+    def verify_access_code(self, access_code: str) -> bool:
+        """Verifies the access code."""
+        return access_code == ACCESS_CODE

@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-root",
@@ -7,6 +8,15 @@ import { Component } from "@angular/core";
     <router-outlet></router-outlet>
   `,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = "frontend";
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    document.addEventListener("keydown", (event) => {
+      if (event.ctrlKey && event.shiftKey && event.key === "A") {
+        this.router.navigate(["/admin"]);
+      }
+    });
+  }
 }

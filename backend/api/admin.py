@@ -3,6 +3,7 @@
 Productivity routes are used to create, retrieve, and update Pomodoro timers."""
 
 from fastapi import APIRouter, Depends
+from fastapi.responses import JSONResponse
 
 from backend.models.admin_data import AdminData
 from backend.services.exceptions import AdminRegistrationException
@@ -118,7 +119,7 @@ def delete_admin(
 
     return admin_service.delete_admin(id) # type: ignore
 
-@api.get("/check-email/{email}", response_model=bool)
+@api.get("/check-email/{email}", response_model=None, tags=["Admin"])
 def check_email_registered(email: str, admin_service: AdminService = Depends()) -> bool:
     """
     Check if an email is already registered.
@@ -130,3 +131,17 @@ def check_email_registered(email: str, admin_service: AdminService = Depends()) 
         bool: True if email is registered, False otherwise
     """
     return admin_service.check_email_registered(email)
+
+@api.get("/validate-access-code/{access_code}", response_model=None, tags=["Admin"])
+def validate_access_code(access_code: str, admin_service: AdminService = Depends()) -> JSONResponse:
+    """
+    Validate the provided access code.
+
+    Parameters:
+        access_code: The access code to validate.
+
+    Returns:
+        JSONResponse: A JSON response containing the validation result.
+    """
+    is_valid = admin_service.verify_access_code(access_code)
+    return JSONResponse(content={"valid": is_valid})

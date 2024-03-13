@@ -62,6 +62,22 @@ export class AdminService {
 
   /** Checks if the email is already registered and returns a boolean value as an observable. */
   checkEmailIsRegistered(email: string): Observable<boolean> {
-    return this.http.get<boolean>("/api/admin", { params: { email } });
+    return this.http.get<boolean>("/api/admin/check-email/" + email);
+  }
+
+  validateAccessCode(accessCode: string): Observable<boolean> {
+    return this.http
+      .get<boolean>("api/admin/validate-access-code/" + accessCode)
+      .pipe(
+        catchError((error) => {
+          // Handle specific error status codes or messages as needed
+          if (error.status === 400) {
+            // Example: Handle invalid access code error
+            alert("Invalid access code.");
+          }
+          // Re-throw the error for further handling if needed
+          return throwError(() => new Error("Error validating access code"));
+        }),
+      );
   }
 }

@@ -4,6 +4,25 @@
   <div class="form-container">
     <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
+        <label for="accessCode">Access Code:</label>
+        <input
+          type="password"
+          formControlName="accessCode"
+          class="form-control"
+          id="accessCode"
+          placeholder="Enter the access code"
+        />
+        <div
+          *ngIf="
+            adminForm.get('accessCode')?.errors?.['required'] &&
+            adminForm.get('accessCode')?.touched
+          "
+          class="alert alert-danger"
+        >
+          Access code is required.
+        </div>
+      </div>
+      <div class="form-group">
         <label for="firstName">First Name:</label>
         <input
           type="text"
@@ -21,26 +40,6 @@
           class="form-control"
           id="lastName"
           placeholder="Enter your last name"
-        />
-      </div>
-      <div class="form-group">
-        <label for="collegeYear">College Year:</label>
-        <input
-          type="text"
-          formControlName="collegeYear"
-          class="form-control"
-          id="collegeYear"
-          placeholder="Enter your college year"
-        />
-      </div>
-      <div class="form-group">
-        <label for="major">Major:</label>
-        <input
-          type="text"
-          formControlName="major"
-          class="form-control"
-          id="major"
-          placeholder="Enter your major"
         />
       </div>
       <div class="form-group">
