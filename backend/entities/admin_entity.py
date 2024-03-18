@@ -14,8 +14,6 @@ __license__ = "MIT"
 
 class AdminEntity(EntityBase):
     """Serves as the database model schema defining the shape of the `AdminData` table"""
-class AdminEntity(EntityBase):
-    """Serves as the database model schema defining the shape of the `AdminData` table"""
 
     __tablename__ = "admin"
     __tablename__ = "admin"
@@ -33,7 +31,6 @@ class AdminEntity(EntityBase):
     # posts = relationship("PostEntity", back_populates="admin")
 
     @classmethod
-    def from_model(cls, model: AdminData) -> Self:
     def from_model(cls, model: AdminData) -> Self:
         """
         Create a AdminEntity from a AdminData model.
@@ -54,14 +51,12 @@ class AdminEntity(EntityBase):
         )
 
     def to_model(self) -> AdminData:
-    def to_model(self) -> AdminData:
         """
         Create a AdminData model from a AdminEntity.
 
         Returns:
             Admin: A AdminData model for API usage.
         """
-        return AdminData(
         return AdminData(
             id=self.id,
             first_name=self.first_name,

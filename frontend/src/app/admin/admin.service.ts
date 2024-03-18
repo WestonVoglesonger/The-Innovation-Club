@@ -64,5 +64,4 @@ export class AdminService {
   checkEmailIsRegistered(email: string): Observable<boolean> {
     return this.http.get<boolean>(`/api/check-email/${email}`);
   }
-  
 }
