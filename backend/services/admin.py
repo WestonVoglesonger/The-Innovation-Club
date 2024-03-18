@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from ..database import db_session
 from ..entities.admin_entity import AdminEntity
 from ..models.admin_data import AdminData
+from ..models.admin_create_data import AdminCreate
 from .exceptions import (
     ResourceNotFoundException,
     AdminRegistrationException,
@@ -32,20 +33,25 @@ class AdminService:
             raise ResourceNotFoundException("admin does not exist.")
         return admin_entity.to_model()
 
-    def create_admin(self, admin: AdminData) -> AdminData:
+    def create_admin(self, admin_create: AdminCreate) -> AdminData:
         """Stores an admin in the database."""
-        existing_email = self._session.query(AdminEntity).filter(AdminEntity.email == admin.email).first()
+        existing_email = self._session.query(AdminEntity).filter(AdminEntity.email == admin_create.email).first()
         if existing_email:
             raise AdminRegistrationException()
 
-        # Hash the password before storing it
-        hashed_password = pwd_context.hash(admin.hashed_password)
-        admin.hashed_password = hashed_password
+        # Hash the plain password
+        hashed_password = pwd_context.hash(admin_create.password)
 
-        new_admin = AdminEntity.from_model(admin)
+        new_admin = AdminEntity(
+            first_name=admin_create.first_name,
+            last_name=admin_create.last_name,
+            email=admin_create.email,
+            hashed_password=hashed_password
+        )
         self._session.add(new_admin)
         self._session.commit()
         return new_admin.to_model()
+
 
     def update_admin(self, admin: AdminData) -> AdminData:
         """Modifies one admin in the database."""

@@ -62,6 +62,7 @@ export class AdminService {
 
   /** Checks if the email is already registered and returns a boolean value as an observable. */
   checkEmailIsRegistered(email: string): Observable<boolean> {
-    return this.http.get<boolean>("/api/admin", { params: { email } });
+    return this.http.get<boolean>(`/api/check-email/${email}`);
   }
+  
 }

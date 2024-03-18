@@ -5,6 +5,8 @@ Productivity routes are used to create, retrieve, and update Pomodoro timers."""
 from fastapi import APIRouter, Depends
 
 from backend.models.admin_data import AdminData
+from backend.models.admin_create_data import AdminCreate
+
 from backend.services.exceptions import AdminRegistrationException
 from ..services.admin import AdminService
 
@@ -61,7 +63,7 @@ def get_admin(
 # Expected return type: AdminData
 @api.post("", response_model=AdminData, tags=["Admin"])
 def create_admin(
-    admin: AdminData,
+    admin_create: AdminCreate,
     admin_service: AdminService = Depends(),
 ) -> AdminData:
     """
@@ -75,7 +77,7 @@ def create_admin(
         admin: Created admin
     """
 
-    return admin_service.create_admin(admin)
+    return admin_service.create_admin(admin_create)
 
 
 # PUT /api/admin

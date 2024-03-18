@@ -21,8 +21,6 @@ export class AdminComponent implements OnInit {
     this.adminForm = this.fb.group({
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
-      collegeYear: ["", Validators.required],
-      major: ["", Validators.required],
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(8)]],
     });
@@ -37,6 +35,7 @@ export class AdminComponent implements OnInit {
       .checkEmailIsRegistered(email)
       .subscribe((isRegistered) => {
         this.isEmailRegistered = isRegistered;
+        alert(this.isEmailRegistered);
       });
   }
 
